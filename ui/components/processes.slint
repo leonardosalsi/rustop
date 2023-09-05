@@ -1,6 +1,4 @@
-import { HorizontalBox, VerticalBox, GroupBox, StandardTableView } from "std-widgets.slint";
-import {Network} from "components/network.slint";
-
+import { StandardTableView } from "std-widgets.slint";
 
 export struct ProcessModel {
     pid: string,
@@ -12,21 +10,16 @@ export struct ProcessModel {
     time: string,
     command: string,
 }
-export component AppWindow inherits Window {
-    width: 1200px;
-    height: 800px;
+export component ProcessList {
+    in property <[ProcessModel]> processes;
+    width: 230px;
+    height: 200px;
     StandardTableView {
-        width: 100%;
-        height: 100%;
+        width: 230px;
+        height: 200px;
         columns: [
-            { title: "PID" },
-            { title: "USER" },
-            { title: "VIRT"},
-            { title: "STATUS"},
-            { title: "%CPU"},
-            { title: "%MEM"},
-            { title: "+TIME"},
-            { title: "COMMAND"},
+            { title: "Header 1" },
+            { title: "Header 2" },
         ];
         rows: [
             [
@@ -40,5 +33,5 @@ export component AppWindow inherits Window {
             ]
         ];
     }
-}
 
+}

@@ -8,8 +8,11 @@ build = "build.rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+chrono = "0.4.28"
+compound_duration = "1.2.1"
 slint = "1.0"
 sysinfo = "0.29.9"
+tokio = "1.32.0"
 
 [build-dependencies]
 slint-build = "1.0"

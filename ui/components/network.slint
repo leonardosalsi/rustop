@@ -1,0 +1,21 @@
+import { GroupBox, HorizontalBox } from "std-widgets.slint";
+
+export component Network {
+    GroupBox {
+        width: parent.width;
+        height: 10%;
+        VerticalLayout {
+            Text {
+                width: 100%;
+                text: "Network";
+            }
+            HorizontalBox {
+                width: 100%;
+                Image { source: @image-url("../assets/check.svg"); }
+                Text{ text: "Text:"; }
+                Image { source: @image-url("../assets/check.svg"); }
+                Text{ text: "Text:"; }
+            }
+        } 
+    }
+}
