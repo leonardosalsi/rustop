@@ -1,10 +1,10 @@
 use minitop::setup;
-
-slint::include_modules!();
 mod minitop;
+slint::include_modules!();
+
 
 fn main() -> Result<(), slint::PlatformError> {
-    let ui = AppWindow::new()?;
+    let ui = MainWindow::new()?;
     setup();
 
     ui.run()
