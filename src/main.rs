@@ -1,11 +1,22 @@
-use minitop::setup;
-mod minitop;
-slint::include_modules!();
+mod specs {
+    pub mod processes;
+    pub mod io;
+    pub mod network;
+    pub mod capacity;
+    pub mod info;
+}
+pub mod ui {
+    slint::include_modules!();
+}
+mod controller;
+use controller::start_measurements;
+use slint::*;
+use ui::*;
 
 
 fn main() -> Result<(), slint::PlatformError> {
-    let ui = MainWindow::new()?;
-    setup();
-
-    ui.run()
+    let window = MainWindow::new()?;
+    let window_weak: Weak<MainWindow> = window.as_weak();
+    start_measurements(window_weak);
+    window.run()
 }

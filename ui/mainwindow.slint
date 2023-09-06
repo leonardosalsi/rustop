@@ -1,8 +1,12 @@
-
-
+import { Button, VerticalBox, StandardTableView } from "std-widgets.slint";
+import {Processes, ProcessesAdapter} from "components/processes.slint";
+export {ProcessesAdapter}
 export component MainWindow inherits Window {
-    title: "Rustop";
     width: 1200px;
     height: 900px;
-    background: #000000;
+    title: "Rustop";
+    Processes {
+        width: 50%;
+        height: 100%;
+    }
 }

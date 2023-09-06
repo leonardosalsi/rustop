@@ -10,9 +10,9 @@ build = "build.rs"
 [dependencies]
 chrono = "0.4.28"
 compound_duration = "1.2.1"
-slint = "1.0"
+slint = "1.2.0"
 sysinfo = "0.29.9"
-tokio = "1.32.0"
+tokio = {version="1.32.0", features = ["full"]}
 
 [build-dependencies]
 slint-build = "1.0"
