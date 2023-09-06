@@ -1,5 +1,9 @@
 
-use sysinfo::{ProcessExt, System, SystemExt, UserExt, PidExt};
+use sysinfo::{NetworkExt, NetworksExt, ProcessExt, System, SystemExt};
+use std::rc::Rc;
+use slint::*;
+use crate::ui::*;
+
 pub struct Capacity {
 
 }

@@ -1,7 +1,6 @@
 use std::rc::Rc;
 use sysinfo::{ProcessExt, System, SystemExt, UserExt, PidExt};
 use slint::*;
-use crate::ui::*;
 use compound_duration::format_dhms;
 
 pub struct Process {
@@ -12,10 +11,10 @@ pub struct Process {
     cpu:     f32,
     mem:     f32,
     time:    u64,
-    command: String,
+    command: String
 }
 
-fn mutate_processes(processes : Vec<Process>) -> ModelRc<ModelRc<StandardListViewItem>> {
+pub fn mutate_processes(processes : Vec<Process>) -> ModelRc<ModelRc<StandardListViewItem>> {
     let prcs: VecModel<ModelRc<StandardListViewItem>> = VecModel::default();
     fn to_standard_list_view_item<T: Into<slint::SharedString>>(value: T) -> StandardListViewItem {
         let shared_string: slint::SharedString = value.into();
@@ -51,25 +50,6 @@ pub fn fetch_processes(sys: &System) -> Vec<Process> {
         };
         processes.push(prc);
     }
-    processes.sort_by(|a, b| b.cpu.partial_cmp(&a.cpu).unwrap());
+    processes.sort_by(|a, b| b.pid.partial_cmp(&a.pid).unwrap());
     return processes;
 }
-
-pub fn show_processes(window_weak: Weak<MainWindow>, processes : Vec<Process>) {
-    window_weak.upgrade_in_event_loop(move |win| {
-        win.global::<ProcessesAdapter>().set_processes(mutate_processes(processes));
-    }).unwrap();
-}
-
-pub fn print_processes(processes : Vec<Process>) {
-    for process in &processes {
-        println!("{} {} {} {} {} {} {} {}", process.pid, process.user, process.virt, process.status, process.cpu, process.mem, process.time, process.command);
-    }
-}
-
-/*
-pub fn get_processes() -> ModelRc<ModelRc<StandardListViewItem>> {
-    let processes: Vec<Process> = fetch_processes();
-    return mutate_processes(processes);
-}
-*/

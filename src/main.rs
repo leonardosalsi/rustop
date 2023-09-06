@@ -12,6 +12,7 @@ mod controller;
 use controller::start_measurements;
 use slint::*;
 use ui::*;
+use std::env;
 
 
 fn main() -> Result<(), slint::PlatformError> {

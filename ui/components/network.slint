@@ -1,21 +1,34 @@
 import { GroupBox, HorizontalBox } from "std-widgets.slint";
 
+export struct NetworkInterface {
+    name: string,
+    received: int,
+    transmitted: int
+}
+
+export global NetworkAdapter {
+    in property <[NetworkInterface]> interfaces;
+}
+
+component Interface {
+    in property <string> name;
+    in property <int> rec;
+    in property <int> trans;
+    padding: 5pt;
+    HorizontalLayout {
+        Text{ text: "\{root.name}: \{root.rec}/\{root.trans}B"; }
+    }
+}
+
 export component Network {
-    GroupBox {
-        width: parent.width;
-        height: 10%;
-        VerticalLayout {
-            Text {
-                width: 100%;
-                text: "Network";
-            }
-            HorizontalBox {
-                width: 100%;
-                Image { source: @image-url("../assets/check.svg"); }
-                Text{ text: "Text:"; }
-                Image { source: @image-url("../assets/check.svg"); }
-                Text{ text: "Text:"; }
-            }
-        } 
+    in property <[NetworkInterface]> interfaces <=> NetworkAdapter.interfaces;
+    HorizontalBox {
+        alignment: LayoutAlignment.start;
+        Text { text: "Network:"; }
+        for interface in interfaces : Interface {
+            name: interface.name;
+            rec: interface.received;
+            trans: interface.transmitted;
+        }
     }
 }

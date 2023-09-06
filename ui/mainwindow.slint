@@ -1,12 +1,19 @@
 import { Button, VerticalBox, StandardTableView } from "std-widgets.slint";
 import {Processes, ProcessesAdapter} from "components/processes.slint";
-export {ProcessesAdapter}
+import {Network, NetworkAdapter, NetworkInterface} from "components/network.slint";
+export {ProcessesAdapter, NetworkAdapter, NetworkInterface}
 export component MainWindow inherits Window {
-    width: 1200px;
+    width: 1400px;
     height: 900px;
     title: "Rustop";
-    Processes {
-        width: 50%;
-        height: 100%;
-    }
+    VerticalLayout {
+        Processes {
+            width: 100%;
+            height: 40%;
+        }
+        Network {
+            width: 100%;
+            height: 10%;
+        }
+    }   
 }
