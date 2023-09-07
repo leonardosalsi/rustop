@@ -8,7 +8,8 @@ use crate::ui::*;
 pub struct I_O {
     name: String,
     mb_read: f64,
-    mb_write: f64
+    mb_write: f64,
+    sub: Vec<I_O>
 }
 
 pub struct DiskMonitor {
@@ -46,7 +47,8 @@ pub fn fetch_io(diskmonitor: Arc<std::sync::Mutex<DiskMonitor>>) -> Vec<I_O> {
         let ds = I_O {
             name: fields[2].to_string(),
             mb_read: fields[5].parse::<f64>().unwrap() / 2048.0,
-            mb_write: fields[9].parse::<f64>().unwrap() / 2048.0
+            mb_write: fields[9].parse::<f64>().unwrap() / 2048.0,
+            sub: Vec::new()
         };
         unsafe {
             if diskmonitor.prev.contains_key(fields[2]) {
@@ -54,7 +56,8 @@ pub fn fetch_io(diskmonitor: Arc<std::sync::Mutex<DiskMonitor>>) -> Vec<I_O> {
                 disks.push(I_O { 
                     name: pds.name.clone(), 
                     mb_read: ds.mb_read - pds.mb_read, 
-                    mb_write: ds.mb_write - pds.mb_write 
+                    mb_write: ds.mb_write - pds.mb_write,
+                    sub: Vec::new()
                 });
             }
         }
@@ -65,13 +68,5 @@ pub fn fetch_io(diskmonitor: Arc<std::sync::Mutex<DiskMonitor>>) -> Vec<I_O> {
     }
     drop(diskmonitor);
     disks.sort_by(|a, b| b.mb_read.partial_cmp(&a.mb_read).unwrap());
-    print_disks(&disks);
     return disks;
-}
-
-pub fn print_disks(disks: &Vec<I_O>) {
-    println!("Disks:");
-    for disk in disks {
-        println!("{}: {} MB/s read, {} MB/s write", disk.name, disk.mb_read, disk.mb_write);
-    }
 }

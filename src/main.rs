@@ -2,7 +2,7 @@ mod specs {
     pub mod processes;
     pub mod io;
     pub mod network;
-    pub mod capacity;
+    pub mod cpu;
     pub mod info;
 }
 pub mod ui {

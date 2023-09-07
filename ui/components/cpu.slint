@@ -1,0 +1,33 @@
+import { VerticalBox } from "std-widgets.slint";
+
+export struct CPUInfo {
+    brand: string,
+    name: string,
+    usage: int,
+    freq: int
+}
+
+export global CPUAdapter {
+    in property <[CPUInfo]> cpus;
+}
+
+component CPUBox {
+    in property <string> name;
+    in property <float> usage;
+
+    VerticalBox { 
+        Text { text: name; font-weight: 500; }
+        Text { text: "Usage: " + usage; }
+     }
+}
+
+export component CPU {
+    in property <[CPUInfo]> cpus <=> CPUAdapter.cpus;
+    VerticalBox {
+        Text{ text: "CPU: " + cpus[0].brand; font-weight: 600; }
+        for cpu in cpus : CPUBox {
+            name: cpu.name;
+            usage: cpu.usage;
+        }
+    }
+} 

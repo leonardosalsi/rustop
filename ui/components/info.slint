@@ -1,0 +1,40 @@
+import { HorizontalBox , VerticalBox} from "std-widgets.slint";
+import { ProgressIndicator } from "std-widgets.slint";
+export struct SystemInformation {
+    sysname: string,
+    syskernel: string,
+    osver: string,
+    hostname: string,
+    uptime: string,
+    used_mem: float,
+    used_swap: float
+}
+
+export global InfoAdapter {
+    in property <SystemInformation> info;
+}
+
+export component System {
+    in property <SystemInformation> info <=> InfoAdapter.info;
+    max-height: 500px;
+    VerticalBox { 
+        Text{ text: "System Information"; font-weight: 600; }
+        Text{ text: "System Name: " + info.sysname; }
+        Text{ text: "Kernel Version: " + info.syskernel; }
+        Text{ text: "OS Version: " + info.osver; }
+        Text{ text: "Hostname: " + info.hostname; }
+        Text{ text: "Uptime: " + info.uptime; }
+        HorizontalBox {
+            Text{ text: "Memory: " + round(info.used_mem) + "%"; }
+            ProgressIndicator {
+                progress: info.used_mem / 100;
+            }
+        }
+        HorizontalBox {
+            Text{ text: "Swap: " + round(info.used_swap) + "%"; }
+            ProgressIndicator {
+                progress: info.used_swap / 100;
+            }
+        }
+    }
+}
