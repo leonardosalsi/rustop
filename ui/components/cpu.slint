@@ -1,4 +1,6 @@
-import { VerticalBox } from "std-widgets.slint";
+import { VerticalBox , ScrollView, ProgressIndicator , GridBox, HorizontalBox} from "std-widgets.slint";
+import { Tile } from "tile.slint";
+import { Colors, ProgBox } from "colors.slint";
 
 export struct CPUInfo {
     brand: string,
@@ -11,23 +13,22 @@ export global CPUAdapter {
     in property <[CPUInfo]> cpus;
 }
 
-component CPUBox {
-    in property <string> name;
-    in property <float> usage;
 
-    VerticalBox { 
-        Text { text: name; font-weight: 500; }
-        Text { text: "Usage: " + usage; }
-     }
-}
-
-export component CPU {
+export component CPU inherits Tile {
     in property <[CPUInfo]> cpus <=> CPUAdapter.cpus;
-    VerticalLayout {
-        Text{ text: "CPU: " + cpus[0].brand; font-weight: 600; }
-        for cpu in cpus : CPUBox {
-            name: cpu.name;
-            usage: cpu.usage;
+        VerticalLayout {
+            padding: 10px;
+            Text{ text: "CPU: " + cpus[0].brand; font-weight: 600; }
+            ScrollView { 
+                padding: 5px;
+                VerticalLayout {
+                    padding: 5px;
+                    for cpu in cpus : ProgBox {
+                        name: cpu.name;
+                        usage: cpu.usage;
+                    }
+                }
+            }
         }
-    }
+    
 } 

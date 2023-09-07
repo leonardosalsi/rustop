@@ -1,0 +1,28 @@
+export struct Palette {
+    // primary
+    background: brush,
+    accent: brush,
+    border: brush,
+    accent-border: brush,
+    bar-background: brush,
+    bar-border: brush
+}
+
+export global Colors {
+    in property <Palette> palette: {
+        background: #161925,
+        accent: 	#254e6b,
+        border: 	#646773,
+        accent-border: 	#3181ae,
+        bar-background: 	#2b2e3b,
+        bar-border: #444853
+    };
+}
+
+export component ProgBox {
+    in property <string> name : "";
+    in property <int> usage: 50;
+    Rectangle { width: 100%; height: 20px; background: Colors.palette.bar-background; border-radius: 5px; border-color: Colors.palette.bar-border; border-width: 1px;}
+    Rectangle { width: parent.width / 100 * usage; height: 20px; background: Colors.palette.accent; border-radius: 5px; border-color: Colors.palette.accent-border; border-width: 1px;}
+    Text { text: "\{name}: \{usage}%"; }
+}

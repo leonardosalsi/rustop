@@ -1,29 +1,17 @@
-import { StandardTableView } from "std-widgets.slint";
+import { StandardTableView,ScrollView} from "std-widgets.slint";
+import { Tile } from "tile.slint";
 
 export global ProcessesAdapter {
     callback sort_ascending(int);
     callback sort_descending(int);
-    in property <[[StandardListViewItem]]> processes :[
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
-        [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}]
-    ];
+    in property <[[StandardListViewItem]]> processes;
 }
-export component Processes {
+export component Processes inherits Tile {
     in property <[[StandardListViewItem]]> processes <=> ProcessesAdapter.processes;
-    
     VerticalLayout {
-        Text {text: "Processes:"; font-weight: 600;}
+        padding: 10px;
+        Text {text: "Processes"; font-weight: 600;}
         StandardTableView {
-            width: 100%;
-            height: 100%;
             columns: [
                 { title: "PID"},
                 { title: "USER"},

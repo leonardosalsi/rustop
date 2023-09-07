@@ -43,7 +43,7 @@ pub fn start_measurements(window_weak: Weak<MainWindow>) {
             tokio::runtime::Runtime::new().unwrap().block_on(async {
                 measure_system(window_weak.clone(), sys.clone(), diskmonitor.clone()).await;
             });
-            thread::sleep(Duration::from_millis(1000));
+            thread::sleep(Duration::from_millis(500));
         }
     });
 }

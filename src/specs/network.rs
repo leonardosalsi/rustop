@@ -6,7 +6,8 @@ use crate::ui::*;
 pub struct Network {
     name: String,
     received: u64,
-    transmitted: u64
+    transmitted: u64,
+    len: usize,
 }
 
 pub fn mutate_network(interfaces: Vec<Network>) -> ModelRc<NetworkInterface> {
@@ -16,6 +17,7 @@ pub fn mutate_network(interfaces: Vec<Network>) -> ModelRc<NetworkInterface> {
             name: interface.name.into(), 
             received: interface.received as i32, 
             transmitted: interface.transmitted as i32, 
+            elems: interface.len as i32
         });
     }
     return Rc::new(VecModel::from(intrf)).into();
@@ -27,7 +29,8 @@ pub fn fetch_network(sys: &System) -> Vec<Network> {
         let int: Network = Network { 
             name:        interface_name.to_string(), 
             received:    data.received(), 
-            transmitted: data.transmitted()
+            transmitted: data.transmitted(),
+            len:         sys.networks().into_iter().count()
         };
         interfaces.push(int);
     }

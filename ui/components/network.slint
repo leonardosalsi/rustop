@@ -1,9 +1,12 @@
-import { GroupBox, HorizontalBox } from "std-widgets.slint";
+import { GroupBox, HorizontalBox , GridBox} from "std-widgets.slint";
+import { Tile } from "tile.slint";
+import { Colors } from "colors.slint";
 
 export struct NetworkInterface {
     name: string,
     received: int,
-    transmitted: int
+    transmitted: int,
+    elems: int
 }
 
 export global NetworkAdapter {
@@ -14,18 +17,20 @@ component Interface {
     in property <string> name;
     in property <int> rec;
     in property <int> trans;
-    padding: 5pt;
-    HorizontalLayout {
-        Text{ text: "\{root.name}: \{root.rec}/\{root.trans}B"; }
-    }
+    Rectangle {width: 100%; height: parent.height; background: Colors.palette.bar-background; border-radius: 5px; border-width: 1px; border-color: Colors.palette.bar-border;}
+    Text{ text: "\{root.name}: \{root.rec}/\{root.trans}B"; overflow: TextOverflow.clip;}
 }
 
-export component Network {
+export component Network inherits Tile {
     in property <[NetworkInterface]> interfaces <=> NetworkAdapter.interfaces;
-    HorizontalBox {
-        alignment: LayoutAlignment.start;
-        Text { text: "Network:"; font-weight: 600; }
+    HorizontalLayout {
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 5px;
+        Text { text: "Network"; font-weight: 600; }
         for interface in interfaces : Interface {
+            width: 1300px / interface.elems;
             name: interface.name;
             rec: interface.received;
             trans: interface.transmitted;

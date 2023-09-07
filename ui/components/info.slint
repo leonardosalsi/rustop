@@ -1,5 +1,8 @@
 import { HorizontalBox , VerticalBox} from "std-widgets.slint";
-import { ProgressIndicator } from "std-widgets.slint";
+import { ProgressIndicator , ScrollView} from "std-widgets.slint";
+import { Tile } from "tile.slint";
+import { ProgBox } from "colors.slint";
+
 export struct SystemInformation {
     sysname: string,
     syskernel: string,
@@ -14,26 +17,21 @@ export global InfoAdapter {
     in property <SystemInformation> info;
 }
 
-export component System {
+export component System inherits Tile {
     in property <SystemInformation> info <=> InfoAdapter.info;
-    max-height: 500px;
     VerticalLayout { 
+        padding: 10px;
         Text{ text: "System Information"; font-weight: 600; }
-        Text{ text: "System Name: " + info.sysname; }
-        Text{ text: "Kernel Version: " + info.syskernel; }
-        Text{ text: "OS Version: " + info.osver; }
-        Text{ text: "Hostname: " + info.hostname; }
-        Text{ text: "Uptime: " + info.uptime; }
-        HorizontalLayout {
-            Text{ text: "Memory: " + round(info.used_mem) + "%"; }
-            ProgressIndicator {
-                progress: info.used_mem / 100;
-            }
-        }
-        HorizontalLayout {
-            Text{ text: "Swap: " + round(info.used_swap) + "%"; }
-            ProgressIndicator {
-                progress: info.used_swap / 100;
+        Rectangle {
+            VerticalLayout {
+                padding: 5px;
+                Text{ text: "System Name: " + info.sysname; }
+                Text{ text: "Kernel Version: " + info.syskernel; }
+                Text{ text: "OS Version: " + info.osver; }
+                Text{ text: "Hostname: " + info.hostname; }
+                Text{ text: "Uptime: " + info.uptime; }
+                ProgBox { name: "Memory"; usage: info.used_mem; }
+                ProgBox { name: "Swap"; usage: info.used_swap; }
             }
         }
     }

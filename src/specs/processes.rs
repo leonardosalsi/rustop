@@ -103,22 +103,22 @@ pub fn fetch_processes(sys: &System) -> Vec<Process> {
     
     unsafe {
         match &SORT {
-            Sort::AsPid=>processes.sort_by(|a, b| a.pid.partial_cmp(&b.pid).unwrap()),
-            Sort::DesPid=>processes.sort_by(|a, b| b.pid.partial_cmp(&a.pid).unwrap()),
-            Sort::AsUser=>processes.sort_by(|a, b| a.user.partial_cmp(&b.user).unwrap()),
-            Sort::DesUser=>processes.sort_by(|a, b| b.user.partial_cmp(&a.user).unwrap()),
-            Sort::AsVirt=>processes.sort_by(|a, b| a.virt.partial_cmp(&b.virt).unwrap()),
-            Sort::DesVirt=>processes.sort_by(|a, b| b.virt.partial_cmp(&a.virt).unwrap()),
-            Sort::AsStatus=>processes.sort_by(|a, b| a.status.partial_cmp(&b.status).unwrap()),
-            Sort::DesStatus=>processes.sort_by(|a, b| b.status.partial_cmp(&a.status).unwrap()),
+            Sort::AsPid=>processes.sort_by(|a, b| a.pid.cmp(&b.pid)),
+            Sort::DesPid=>processes.sort_by(|a, b| b.pid.cmp(&a.pid)),
+            Sort::AsUser=>processes.sort_by(|a, b| a.user.cmp(&b.user)),
+            Sort::DesUser=>processes.sort_by(|a, b| b.user.cmp(&a.user)),
+            Sort::AsVirt=>processes.sort_by(|a, b| a.virt.cmp(&b.virt)),
+            Sort::DesVirt=>processes.sort_by(|a, b| b.virt.cmp(&a.virt)),
+            Sort::AsStatus=>processes.sort_by(|a, b| a.status.cmp(&b.status)),
+            Sort::DesStatus=>processes.sort_by(|a, b| b.status.cmp(&a.status)),
             Sort::AsCpu=>processes.sort_by(|a, b| a.cpu.partial_cmp(&b.cpu).unwrap()),
             Sort::DesCpu=>processes.sort_by(|a, b| b.cpu.partial_cmp(&a.cpu).unwrap()),
             Sort::AsMem=>processes.sort_by(|a, b| a.mem.partial_cmp(&b.mem).unwrap()),
             Sort::DesMem=>processes.sort_by(|a, b| b.mem.partial_cmp(&a.mem).unwrap()),
-            Sort::AsTime=>processes.sort_by(|a, b| a.time.partial_cmp(&b.time).unwrap()),
-            Sort::DesTime=>processes.sort_by(|a, b| b.time.partial_cmp(&a.time).unwrap()),
-            Sort::AsCommand=>processes.sort_by(|a, b| a.command.partial_cmp(&b.command).unwrap()),
-            Sort::DesCommand=>processes.sort_by(|a, b| b.command.partial_cmp(&a.command).unwrap()),
+            Sort::AsTime=>processes.sort_by(|a, b| a.time.cmp(&b.time)),
+            Sort::DesTime=>processes.sort_by(|a, b| b.time.cmp(&a.time)),
+            Sort::AsCommand=>processes.sort_by(|a, b| a.command.cmp(&b.command)),
+            Sort::DesCommand=>processes.sort_by(|a, b| b.command.cmp(&a.command)),
         }
     }
     
