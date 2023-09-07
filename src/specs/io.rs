@@ -16,14 +16,14 @@ pub struct I_O {
 #[derive(Serialize, Deserialize)]
 struct IOMAP(HashMap<String, I_O>);
 
-fn load_map(mut temp_file: &File) -> HashMap<String, I_O> {
+fn load_map(mut temp_file: &File) -> Result<HashMap<String, I_O>, Box<dyn std::error::Error>> {
     let mut contents = String::new();
-    temp_file.read_to_string(&mut contents).unwrap();
+    temp_file.read_to_string(&mut contents)?;
 
-    let deserialized: IOMAP = serde_json::from_str(&contents).unwrap();
+    let deserialized: IOMAP = serde_json::from_str(&contents)?;
     let map = deserialized.0;
 
-    return map;
+    Ok(map)
 }
 
 fn write_map(mut temp_file: &File, map: HashMap<String, I_O>) {
@@ -32,11 +32,17 @@ fn write_map(mut temp_file: &File, map: HashMap<String, I_O>) {
     file.write_all(serialized.as_bytes()).unwrap();
 }
 
-
 pub fn fetch_io(mut temp_file: &File) -> Vec<I_O> {
     let mut disks: Vec<I_O> = Vec::new();
     let mut curr: HashMap<String, I_O>= HashMap::new();
-    let mut prev: HashMap<String, I_O> = load_map(&temp_file);
+    match load_map(&temp_file) {
+        Ok(prev) => {
+            // Do something with the map
+        },
+        Err(e) => {
+            eprintln!("An error occurred: {}", e);
+        }
+    }
     let mut io_data = String::new();
     let mut fd = File::open(&"/proc/diskstats").unwrap();
     fd.read_to_string(&mut io_data).unwrap();
