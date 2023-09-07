@@ -16,7 +16,7 @@ struct Measurements {
     cpu: Vec<CPU>,
     processes: Vec<Process>,
     network: Vec<Network>,
-    io: Vec<I_O>
+    io: Vec<Disk>
 }
 
 fn fetch_measurements(sys:Arc<std::sync::Mutex<System>>, diskmonitor: Arc<std::sync::Mutex<DiskMonitor>>) -> Measurements {
@@ -51,6 +51,8 @@ pub fn start_measurements(window_weak: Weak<MainWindow>) {
 async fn measure_system(window_weak: Weak<MainWindow>, sys:Arc<std::sync::Mutex<System>>, diskmonitor: Arc<std::sync::Mutex<DiskMonitor>>) {
     let measurements = fetch_measurements(sys, diskmonitor);
     window_weak.upgrade_in_event_loop(move |win| {
+        win.global::<ProcessesAdapter>().on_sort_ascending(sort_asc);
+        win.global::<ProcessesAdapter>().on_sort_descending(sort_desc);
         win.global::<NetworkAdapter>().set_interfaces(mutate_network(measurements.network));
         win.global::<ProcessesAdapter>().set_processes(mutate_processes(measurements.processes));
         win.global::<IOAdapter>().set_disks(mutate_io(measurements.io));

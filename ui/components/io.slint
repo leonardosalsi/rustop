@@ -1,9 +1,16 @@
 import { VerticalBox } from "std-widgets.slint";
 
-export struct DiskIO {
+export struct PartitionIO {
     name: string,
     read: float,
     write: float
+}
+
+export struct DiskIO {
+    name: string,
+    read: float,
+    write: float,
+    part: [PartitionIO]
 }
 
 export global IOAdapter {
@@ -14,31 +21,40 @@ component DiskBox {
     in property <string> name;
     in property <float> read;
     in property <float> write;
+    in property <[PartitionIO]> part;
 
-    VerticalBox { 
-        Text { text: name; font-weight: 500; }
+    VerticalLayout { 
+        Text { text: name; font-weight: 500; font-italic: true;}
         Text { text: "Read: " + read + "MB/s"; }
         Text { text: "Write: " + write + "MB/s"; }
-     }
+    }
+
+    popup := PopupWindow {
+        Rectangle { background: black; width: 100%; padding: 10px;
+            VerticalLayout { height:100%; width: 100%;  padding: 10px; 
+                for p in part : Text { 
+                    text: p.name + ": Total Read: " + p.read + " MB | Total Written: " + p.write + " MB"; 
+                }
+            }}
+        
+        x: 20px; y: 20px; height: 50px; width: 50px;
+    }
+    TouchArea {
+        height:100%; width: 100%;
+        clicked => { popup.show(); }
+    }
 }
 
 export component IO{
     in property <[DiskIO]> disks <=> IOAdapter.disks;
-    popup := PopupWindow {
-        Rectangle { height:100%; width: 100%; background: yellow; }
-        x: 20px; y: 20px; height: 50px; width: 50px;
-    }
-    TouchArea {
-        height:parent.height; width: parent.width;
-        clicked => { popup.show(); }
-    }
-    VerticalBox {
     
+    VerticalLayout {
         Text{ text: "Disk IO"; font-weight: 600; }
         for disk in disks : DiskBox {
             name: disk.name;
             read: disk.read;
             write: disk.write;
+            part: disk.part;
         }
     }
 } 

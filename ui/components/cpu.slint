@@ -23,7 +23,7 @@ component CPUBox {
 
 export component CPU {
     in property <[CPUInfo]> cpus <=> CPUAdapter.cpus;
-    VerticalBox {
+    VerticalLayout {
         Text{ text: "CPU: " + cpus[0].brand; font-weight: 600; }
         for cpu in cpus : CPUBox {
             name: cpu.name;

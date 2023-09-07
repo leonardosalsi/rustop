@@ -1,6 +1,8 @@
 import { StandardTableView } from "std-widgets.slint";
 
 export global ProcessesAdapter {
+    callback sort_ascending(int);
+    callback sort_descending(int);
     in property <[[StandardListViewItem]]> processes :[
         [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
         [{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"},{text: "Item1"}],
@@ -16,6 +18,7 @@ export global ProcessesAdapter {
 }
 export component Processes {
     in property <[[StandardListViewItem]]> processes <=> ProcessesAdapter.processes;
+    
     VerticalLayout {
         Text {text: "Processes:"; font-weight: 600;}
         StandardTableView {
@@ -32,6 +35,13 @@ export component Processes {
                 { title: "COMMAND"},
             ];
             rows: root.processes; 
+            sort-ascending(index) => {
+                ProcessesAdapter.sort_ascending(index);
+            }
+
+            sort-descending(index) => {
+                ProcessesAdapter.sort-descending(index);
+            }
         }
     }
 }

@@ -1,14 +1,16 @@
-import {Button, VerticalBox, StandardTableView } from "std-widgets.slint";
+import {Button, VerticalBox, StandardTableView , HorizontalBox} from "std-widgets.slint";
 import {Processes, ProcessesAdapter} from "components/processes.slint";
 import {Network, NetworkAdapter, NetworkInterface} from "components/network.slint";
-import {IO, IOAdapter, DiskIO} from "components/io.slint";
+import {IO, IOAdapter, DiskIO, PartitionIO} from "components/io.slint";
 import {System, InfoAdapter} from "components/info.slint";
 import {CPUInfo, CPUAdapter, CPU} from "components/cpu.slint";
-export {ProcessesAdapter, NetworkAdapter, NetworkInterface, IOAdapter, DiskIO, InfoAdapter, CPUInfo, CPUAdapter}
+export {ProcessesAdapter, NetworkAdapter, NetworkInterface, IOAdapter, DiskIO, PartitionIO, InfoAdapter, CPUInfo, CPUAdapter}
 export component MainWindow inherits Window {
     width: 1400px;
     height: 900px;
     title: "Rustop";
+    callback sort_ascending_col(int);
+    callback sort_descending_col(int);
     VerticalLayout {
         HorizontalLayout {
             System {
