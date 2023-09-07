@@ -1,0 +1,35 @@
+import { VerticalBox } from "std-widgets.slint";
+
+export struct DiskIO {
+    name: string,
+    read: float,
+    write: float
+}
+
+export global IOAdapter {
+    in property <[DiskIO]> disks;
+}
+
+component DiskBox {
+    in property <string> name;
+    in property <float> read;
+    in property <float> write;
+
+    VerticalBox { 
+        Text { text: name; font-weight: 500; }
+        Text { text: "Read: " + read + "MB/s"; }
+        Text { text: "Write: " + write + "MB/s"; }
+     }
+}
+
+export component IO {
+    in property <[DiskIO]> disks <=> IOAdapter.disks;
+    VerticalBox {
+        Text{ text: "Disk IO"; font-weight: 600; }
+        for disk in disks : DiskBox {
+            name: disk.name;
+            read: disk.read;
+            write: disk.write;
+        }
+    }
+} 

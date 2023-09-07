@@ -24,7 +24,7 @@ export component Network {
     in property <[NetworkInterface]> interfaces <=> NetworkAdapter.interfaces;
     HorizontalBox {
         alignment: LayoutAlignment.start;
-        Text { text: "Network:"; }
+        Text { text: "Network:"; font-weight: 600; }
         for interface in interfaces : Interface {
             name: interface.name;
             rec: interface.received;
