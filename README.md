@@ -1,6 +1,6 @@
-# Rustop
+# RUSTop
 
-![Screenshot_20230908_102831](https://github.com/leonardosalsi/rustop/assets/55445584/9890f5e2-d7bd-4a11-a072-17c2cedfffd5)
+![screenshot](https://github.com/leonardosalsi/rustop/assets/55445584/3e9bec4e-2202-48c4-88ca-4be1cd21e317)
 ## Overview
 Rustop is a lightweight and efficient system monitoring tool, designed as an alternative to Linux's `top` command. Built with Rust and Slint, this project aims to provide real-time updates on system performance and resource usage.
 
