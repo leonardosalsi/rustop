@@ -28,9 +28,9 @@ component DiskBox {
     Rectangle {width: 100%; height: 60px; background: Colors.palette.bar-background; border-radius: 5px; border-width: 1px; border-color: Colors.palette.bar-border;
         VerticalLayout { 
             padding: 2px;
-            Text { text: name; font-weight: 600; font-italic: true;}
-            Text { text: "  Read: " + read + " MB/s"; }
-            Text { text: "  Write: " + write + " MB/s"; }
+            Text { text: " \{name}"; font-weight: 600; font-italic: true; padding-left: 2px;}
+            Text { text: "    Read: " + read + " MB/s"; padding-left: 8px; }
+            Text { text: "    Write: " + write + " MB/s"; padding-left: 8px;}
         }
     }
 
