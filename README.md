@@ -13,8 +13,16 @@ Rustop is a lightweight and efficient system monitoring tool, designed as an alt
 ## Installation
 
 ### Prerequisites
-- Rust programming language
-- Slint library
+Dependencies
+```
+chrono = "0.4.28"
+compound_duration = "1.2.1"
+serde = "1.0.188"
+serde_json = "1.0.105"
+slint = "1.2.0"
+sysinfo = "0.29.10"
+tokio = {version="1.32.0", features = ["full"]}
+```
 
 ### Steps
 1. Clone the repository:<br>
