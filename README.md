@@ -5,7 +5,7 @@
 Rustop is a lightweight and efficient system monitoring tool, designed as an alternative to Linux's `top` command. Built with Rust and Slint, this project aims to provide real-time updates on system performance and resource usage.
 
 ## Features
-- Real-time CPU, memory, and disk usage statistics
+- Real-time CPU, memory,disk usage and network statistics
 - Interactive user interface
 - Multi-threaded measurements for accurate data
 - Easily extensible and customizable
