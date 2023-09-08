@@ -28,9 +28,11 @@ export component Network inherits Tile {
         padding-top: 5px;
         padding-bottom: 5px;
         padding-right: 5px;
-        Text { text: "Network"; font-weight: 600; }
+        Rectangle {
+            Text { text: "Network"; font-weight: 600; }
+        }
         for interface in interfaces : Interface {
-            width: 1300px / interface.elems;
+            width: 1280px / interface.elems;
             name: interface.name;
             rec: interface.received;
             trans: interface.transmitted;

@@ -36,6 +36,6 @@ pub fn fetch_cpu(sys: &System) -> Vec<CPU> {
         };
         cpus.push(cpob);
     }
-    cpus.sort_by(|a, b| a.name.partial_cmp(&b.name).unwrap());
+    //cpus.sort_by(|a, b| a.name.partial_cmp(&b.name).unwrap());
     return cpus;
 }

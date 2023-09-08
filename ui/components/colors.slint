@@ -1,3 +1,4 @@
+import { HorizontalBox } from "std-widgets.slint";
 export struct Palette {
     // primary
     background: brush,
@@ -22,7 +23,7 @@ export global Colors {
 export component ProgBox {
     in property <string> name : "";
     in property <int> usage: 50;
-    Rectangle { width: 100%; height: 20px; background: Colors.palette.bar-background; border-radius: 5px; border-color: Colors.palette.bar-border; border-width: 1px;}
-    Rectangle { width: parent.width / 100 * usage; height: 20px; background: Colors.palette.accent; border-radius: 5px; border-color: Colors.palette.accent-border; border-width: 1px;}
+    base := Rectangle { width: 100%; height: 20px; background: Colors.palette.bar-background; border-radius: 5px; border-color: Colors.palette.bar-border; border-width: 1px;}
+    Rectangle { x: base.x; width: base.width / 100 * usage; height: 20px; background: Colors.palette.accent; border-radius: 5px; border-color: Colors.palette.accent-border; border-width: 1px;}  
     Text { text: "\{name}: \{usage}%"; }
 }

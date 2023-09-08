@@ -15,10 +15,13 @@ export component Processes inherits Tile {
             columns: [
                 { title: "PID"},
                 { title: "USER"},
-                { title: "VIRT"},
+                { title: "RES"},
+                { title: "SHR"},
                 { title: "STATUS"},
                 { title: "%CPU"},
                 { title: "%MEM"},
+                { title: "Read"},
+                { title: "Write"},
                 { title: "TIME"},
                 { title: "COMMAND"},
             ];
@@ -26,7 +29,6 @@ export component Processes inherits Tile {
             sort-ascending(index) => {
                 ProcessesAdapter.sort_ascending(index);
             }
-
             sort-descending(index) => {
                 ProcessesAdapter.sort-descending(index);
             }
