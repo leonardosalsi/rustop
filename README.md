@@ -26,11 +26,27 @@ Rustop is a lightweight and efficient system monitoring tool, designed as an alt
 4. Run the executable:<br>
 ```./target/release/rustop```
 
-## Usage
-Simply run the `rustop` executable to start monitoring your system. Use keyboard shortcuts to interact with the interface.
+## Next Steps (Roadmap)
+
+Here are some features and improvements planned for future releases:
+
+### Short-Term Goals
+- Implement network usage monitoring
+- Add support for custom themes
+- Improve error handling and logging
+
+### Long-Term Goals
+- Cross-platform support (Windows, macOS)
+- User authentication for secure monitoring
+- Develop a centralized management system for anomaly detection across system clusters
+- Integrate machine learning algorithms for real-time anomaly detection
+
+### Under Consideration
+- Docker container support
+- Cloud-based monitoring solutions
 
 ## Contributing
-We welcome contributions! Feel free to open an issue or submit a pull request.
+If you're interested in contributing to any of these features, or have ideas of your own, feel free to open an issue or submit a pull request.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
