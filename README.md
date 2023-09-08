@@ -39,7 +39,6 @@ tokio = {version="1.32.0", features = ["full"]}
 Here are some features and improvements planned for future releases:
 
 ### Short-Term Goals
-- Implement network usage monitoring
 - Add support for custom themes
 - Improve error handling and logging
 
